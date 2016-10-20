@@ -8,12 +8,21 @@ module.exports = function sortRouteAddresses (addresses, options) {
   // Ensure options is an object.
   options = options || {};
 
+  // Regular expression to test whether an address corresponds to a
+  // Sails regex route.
+  var regExRoute = /^r\|(.*)\|(.*)$/;
+
   // First, find the # of components in the longest route path.
   var maxComponents = _.reduce(addresses, function(memo, address) {
 
     // Parse the path out of the address.
     var addressInfo = parseAddress(address);
     var path = addressInfo.path;
+
+    // If the path is a Sails regex, skip it (unless we're instructed not to)
+    if (path.match(regExRoute) && !options.sortRegexes) {
+      return memo;
+    }
 
     // Split the path into components.
     var components = path.split('/');
@@ -32,6 +41,10 @@ module.exports = function sortRouteAddresses (addresses, options) {
 
   }, 0);
 
+  // Declare a var to hold the last rank produced
+  // (used for sorting regex addresses)
+  var lastRank = Array(maxComponents).fill(0).join('');
+
   // Now create a dictionary mapping ranks to addresses.
   var rankedAddresses = _.reduce(addresses, function(memo, address) {
 
@@ -39,6 +52,17 @@ module.exports = function sortRouteAddresses (addresses, options) {
     var addressInfo = parseAddress(address);
     var path = addressInfo.path;
     var verb = addressInfo.verb;
+
+    // If the path represents a Sails regex address, and we're not told
+    // explicitly to sort it, just give it the same rank as the whatever
+    // address we saw last.  This means it'll be placed directly after
+    // whichever address it was following in the unsorted address list.
+    if (path.match(regExRoute) && !options.sortRegexes) {
+      rank = lastRank;
+      memo[rank] = memo[rank] || [];
+      memo[rank].push(address);
+      return memo;
+    }
 
     // Declare a flag indicating whether a (non-"all") verb was specified.
     var hasVerb = (verb && verb !== 'all');
@@ -119,6 +143,9 @@ module.exports = function sortRouteAddresses (addresses, options) {
     // rank to an _array_ of addresses.
     memo[rank] = memo[rank] || [];
     memo[rank].push(address);
+
+    // Update `lastRank`.
+    lastRank = rank;
 
     return memo;
 

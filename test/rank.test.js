@@ -17,6 +17,7 @@ function() {
       '/*/bar/baz',
       '/:foo/*',
       '/:foo/:bar/*',
+      'r|^/foo/\\d+$|',
       '/:foo/:bar/:baz',
       '/:foo/:bar/baz',
       '/:foo/:bar',
@@ -63,6 +64,7 @@ function() {
       '/:foo/:bar',
       '/:foo/:bar/:baz',
       '/:foo/:bar/*',
+      'r|^/foo/\\d+$|',
       '/:foo/*',
       'GET /*',
       '/*'
