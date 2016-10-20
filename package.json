@@ -1,6 +1,6 @@
 {
   "name": "sort-route-addresses",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sort Sails/Express-style route addresses by inclusivity",
   "main": "index.js",
   "scripts": {
