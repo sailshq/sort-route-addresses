@@ -8,7 +8,7 @@ For the purposes of this algorithm, a route address is a string containing:
 * 1 or more path components, where each path component is:
   * A forward slash `/`, followed by:
   * A colon `:` followed by any combination of letters and numbers (a "param"), OR
-  * A star `*` OR (a "wildcard")
+  * A star `*` (a "wildcard"), OR 
   * Any combination of letters and numbers (a "static path component")
 
 In other words, any Sails-compatible route path.
