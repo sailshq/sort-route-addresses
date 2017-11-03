@@ -65,3 +65,24 @@ RANK  ADDRESS
 <hr/>
 
 <a name="footnote1"><sup>1</sup></a>: This ensures that addresses like `/*/baz/*` are ranked above ones like `/:foo/:bar/:baz` -- the static `baz` component implies that the author intends for `*/baz/*` to handle request URLs of at least three components, one of which is `baz`; if `/:foo/:bar/:baz/` were ranked higher in the list, it would swallow the subset of those URLs with _exactly_ three components.
+
+
+## Help
+
+If you have a question, need professional support, or just want to talk Sails/Node.js with other folks in the community, click [here](https://sailsjs.com/support).
+
+
+## Bugs &nbsp; [![NPM version](https://badge.fury.io/js/sort-route-addresses.svg)](http://npmjs.com/package/sort-route-addresses)
+
+To report a bug, [click here](https://sailsjs.com/bugs).
+
+
+## Contributing
+
+Please observe the guidelines and conventions laid out in the [Sails project contribution guide](https://sailsjs.com/documentation/contributing) when opening issues or submitting pull requests.
+
+[![NPM](https://nodei.co/npm/sort-route-addresses.png?downloads=true)](http://npmjs.com/package/sort-route-addresses)
+
+## License
+
+Like the [Sails framework](https://sailsjs.com), this package is free and open-source under the [MIT License](https://sailsjs.com/license).
