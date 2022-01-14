@@ -93,13 +93,13 @@ module.exports = function sortRouteAddresses (addresses, options) {
       // at least `i+1` components)...
       if (components[i]) {
         // Add a '3' for each wildcard.
-        if (components[i] === '*') {
+        if (components[i] === '*' || components[i] === '?*') {
           rank += '3';
           // Indicate that this address has a wildcard.
           seenWildcard = true;
         }
         // Add a `2` for each param.
-        else if (components[i][0] === ':') {
+        else if (components[i][0] === ':' || components[i] === '?:') {
           rank += '2';
         }
         // Add a `1` for each static path component.
