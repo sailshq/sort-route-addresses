@@ -99,7 +99,7 @@ module.exports = function sortRouteAddresses (addresses, options) {
           seenWildcard = true;
         }
         // Add a `2` for each param.
-        else if (components[i][0] === ':' || components[i] === '?:') {
+        else if (components[i][0] === ':') {
           rank += '2';
         }
         // Add a `1` for each static path component.
